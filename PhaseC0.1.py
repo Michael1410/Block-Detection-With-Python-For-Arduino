@@ -1,3 +1,5 @@
+# In this program we have the aruco marker representing a simple mobile robot, this mean the aruco marker will act as a mask for the robot's localization
+
 # Standard imports
 import cv2
 import numpy as np;
@@ -253,7 +255,7 @@ while (1):
         print("Centriod of bot: ", CentriodXY)
         # --------------------------------------------------------------------------------------------
 
-        # __________________Find the angle of the robot_________________________________________________________Important
+        # __________________Find the angle of the robot_________________________________________________________
         myradiansBot = math.atan2(yCentriod - midy, xCentriod - midx)
         #print("Angle in Radians: ", myradiansBot)
         BotAngle = math.degrees(myradiansBot)
@@ -272,7 +274,7 @@ while (1):
             print("Distance Between Bot center and First lego: ", (xDistanceBetweenFirst, yDistanceBetweenFirst))
             print("First Lego: ", (FirstLegox, FirstLegoy))
 
-            # Find Angle Between robot and first big lego_______________________________________________________Important
+            # Find Angle Between robot and first big lego_______________________________________________________
             myradiansBotBLf = math.atan2(midy - FirstLegoy, midx - FirstLegox)
             # print("Angle in Radians: ", myradiansBot)
             angleOfFirstBL = math.degrees(myradiansBotBLf)
@@ -304,7 +306,7 @@ while (1):
                 print("Distance Between Bot center and First lego: ", (xDistanceBetweenFirstS, yDistanceBetweenFirstS))
                 print("First Lego: ", (rFirstLegox, rFirstLegoy))
 
-                # Find Angle Between robot and first big lego_______________________________________________________Important
+                # Find Angle Between robot and first big lego_______________________________________________________
                 myradiansBotSf = math.atan2(midy - rFirstLegoy, midx - rFirstLegox)
                 # print("Angle in Radians: ", myradiansBot)
                 angleOfFirstS = math.degrees(myradiansBotSf)
@@ -317,7 +319,7 @@ while (1):
                 yDistanceBetweenSecondS = midy - rSecondLegoy
                 print("Distance Between Bot center and Second small lego: ", (xDistanceBetweenSecondS, yDistanceBetweenSecondS))
 
-                # Find Angle Between robot and second big lego________________________________Important
+                # Find Angle Between robot and second big lego________________________________
                 myradiansBotSs = math.atan2(midy - rSecondLegoy, midx - rSecondLegox)
                 # print("Angle in Radians: ", myradiansBot)
                 angleOfSecondS = math.degrees(myradiansBotSs)
