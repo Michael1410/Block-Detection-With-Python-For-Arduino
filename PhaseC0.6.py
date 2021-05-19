@@ -1,3 +1,5 @@
+# Detect location 2 red lego and 2 green lego, and aruco marker then send data to Arduino 
+
 # Standard imports
 import cv2
 import numpy as np;
@@ -22,13 +24,10 @@ cv2.namedWindow("TEST", cv2.WINDOW_AUTOSIZE)
 cv2.namedWindow("TEST2", cv2.WINDOW_AUTOSIZE)
 cv2.startWindowThread()
 
-#ser = serial.Serial('/dev/tty.usbmodem1d11', 9600) # Establish the connection on a specific port
-#counter = 32 # Below 32 everything in ASCII is gibberish
-ser = serial.Serial('COM3', 115200, timeout=1) # Establish the connection on a specific port
+# Establish the connection on a specific port
+ser = serial.Serial('COM3', 115200, timeout=1) 
 ser.set_buffer_size(rx_size = 2147483647 , tx_size = 2147483647 )
 time.sleep(1)
-#ser.baudrate=9600
-#counter = 32 # Below 32 everything in ASCII is gibberish
 
 aruco_dict = aruco.Dictionary_get(aruco.DICT_5X5_1000)
 parameters = aruco.DetectorParameters_create()
@@ -168,22 +167,13 @@ while (1):
             #value = float(ser.readline().strip())
             #time.sleep(0.1)
 
-
+            # Send x and y coordinates to the Arduino
             ser.write("{:.2f}x\n".format(FirstLegox).encode())
             ser.write("{:.2f}y\n".format(FirstLegoy).encode())
             print(ser.readline().strip())
             counts = counts + 1
 
-
-
-            #time.sleep(0.01)
-
-
-            #print(ser.readline().strip())
-            #print('First Big Lego x: {0:0.2f}'.format(FirstLegox))
-
-            #print(ser.decode('utf-8'))
-        # Second Big Lego Found Coordinates______________________________________________Important
+        # Second Big Lego Found Coordinates______________________________________________
 
             if (i == 1 and GRarea > 45 and GRarea < 100 and countA <= 50):
                 SecondLegox = Grkeypoints[1].pt[0]
@@ -191,6 +181,8 @@ while (1):
                 SecondLegoxy = (SecondLegox, SecondLegoy)
                 found2 = 1
                 #time.sleep(0.1)
+                
+                # Send x and y coordinates to the Arduino
                 ser.write("{:.2f}q\n".format(SecondLegox).encode())
                 ser.write("{:.2f}w\n".format(SecondLegoy).encode())
                 print(ser.readline().strip())
@@ -233,11 +225,13 @@ while (1):
             rFirstLegoxy = (rFirstLegox, rFirstLegoy)
             rfound1 = 1
             #time.sleep(0.1)
+            
+            # Send x and y coordinates to the Arduino
             ser.write("{:.2f}e\n".format(rFirstLegox).encode())
             ser.write("{:.2f}r\n".format(rFirstLegoy).encode())
             print(ser.readline().strip())
             countsB = countsB + 1
-        #time.sleep(0.01)
+
 
         # Second Big Lego Found Coordinates______________________________________________Important
         if (z == 1 and Rarea > 45 and Rarea < 100 and countsC <= 50):
@@ -246,6 +240,8 @@ while (1):
             rSecondLegoxy = (rSecondLegox, rSecondLegoy)
             rfound2 = 1
             #time.sleep(0.1)
+            
+            # Send x and y coordinates to the Arduino
             ser.write("{:.2f}t\n".format(rSecondLegox).encode())
             ser.write("{:.2f}l\n".format(rSecondLegoy).encode())
             print(ser.readline().strip())
